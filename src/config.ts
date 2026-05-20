@@ -1,8 +1,24 @@
 // SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
 // SPDX-License-Identifier: Apache-2.0
 
-// Default values work on localhost:3000 and foomedical.com
-// Replace these values with your own values for production
-export const MEDPLUM_PROJECT_ID = '9602358d-eeb0-4de8-bccf-e2438b5c9162';
-export const MEDPLUM_GOOGLE_CLIENT_ID = '679052511930-8dqur4mmg8egbttgos5pmr4ljtf3etbb.apps.googleusercontent.com';
-export const MEDPLUM_RECAPTCHA_SITE_KEY = '6LfFd_8gAAAAAOCVrZQ_aF2CN5b7s91NEYIu5GxL';
+const UBIX_DATA_PROJECT_ID = '7e472dfd-3ab9-4b75-adac-38e0c5c5d6c8';
+const HIIVE_PATIENT_CLIENT_ID = 'b9cedb18-971b-489e-afbd-07fa429f66dd';
+
+function optionalEnv(value: string | undefined): string | undefined {
+	const trimmed = value?.trim();
+	return trimmed ? trimmed : undefined;
+}
+
+function defaultMedplumBaseUrl(): string {
+	if (import.meta.env.DEV && typeof window !== 'undefined') {
+		return `${window.location.origin}/`;
+	}
+	return 'https://api.ehr.hiivehealth.net/';
+}
+
+export const MEDPLUM_BASE_URL = optionalEnv(import.meta.env.VITE_MEDPLUM_BASE_URL) ?? defaultMedplumBaseUrl();
+export const MEDPLUM_PROJECT_ID = optionalEnv(import.meta.env.VITE_MEDPLUM_PROJECT_ID) ?? UBIX_DATA_PROJECT_ID;
+export const MEDPLUM_CLIENT_ID = optionalEnv(import.meta.env.VITE_MEDPLUM_CLIENT_ID) ?? HIIVE_PATIENT_CLIENT_ID;
+export const MEDPLUM_GOOGLE_CLIENT_ID = optionalEnv(import.meta.env.VITE_MEDPLUM_GOOGLE_CLIENT_ID);
+export const MEDPLUM_RECAPTCHA_SITE_KEY = optionalEnv(import.meta.env.VITE_MEDPLUM_RECAPTCHA_SITE_KEY);
+export const MEDPLUM_LOGIN_SCOPE = 'openid profile email fhirUser patient/*.rs offline_access';

@@ -4,7 +4,7 @@ import { BackgroundImage, Box, SimpleGrid } from '@mantine/core';
 import { SignInForm } from '@medplum/react';
 import type { JSX } from 'react';
 import { useNavigate } from 'react-router';
-import { MEDPLUM_GOOGLE_CLIENT_ID, MEDPLUM_PROJECT_ID } from '../config';
+import { MEDPLUM_CLIENT_ID, MEDPLUM_GOOGLE_CLIENT_ID, MEDPLUM_LOGIN_SCOPE, MEDPLUM_PROJECT_ID } from '../config';
 
 export function SignInPage(): JSX.Element {
   const navigate = useNavigate();
@@ -13,6 +13,9 @@ export function SignInPage(): JSX.Element {
       <Box pt={100} pb={200}>
         <SignInForm
           projectId={MEDPLUM_PROJECT_ID}
+          clientId={MEDPLUM_CLIENT_ID}
+          resourceType="Patient"
+          scope={MEDPLUM_LOGIN_SCOPE}
           googleClientId={MEDPLUM_GOOGLE_CLIENT_ID}
           onSuccess={() => navigate('/')?.catch(console.error)}
         >
