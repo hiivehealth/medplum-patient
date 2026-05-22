@@ -13,12 +13,12 @@ export function Footer(): JSX.Element {
             <SimpleGrid cols={4}>
               <Anchor href="https://www.medplum.com/docs/tutorials/api-basics/create-fhir-data">Getting started</Anchor>
               <Anchor href="https://www.medplum.com/docs/tutorials">Playing with Medplum</Anchor>
-              <Anchor href="https://github.com/medplum/foomedical">Open Source</Anchor>
+              <Anchor href="https://github.com/medplum/medplum">Open Source</Anchor>
               <Anchor href="https://www.medplum.com/docs">Documentation</Anchor>
             </SimpleGrid>
             <Divider />
             <Text c="dimmed" size="sm">
-              &copy; {new Date().getFullYear()} Foo Medical, Inc. All rights reserved.
+              &copy; {new Date().getFullYear()} Hiive Patient. All rights reserved.
             </Text>
           </Stack>
         </Container>
