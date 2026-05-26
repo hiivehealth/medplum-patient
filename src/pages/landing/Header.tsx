@@ -99,7 +99,7 @@ export function Header(): JSX.Element {
         <Container h="100%">
           <Group justify="space-between" h="100%">
             <UnstyledButton className={classes.logoButton} onClick={() => navigate('/')?.catch(console.error)}>
-              <Logo width={240} />
+              <Logo width={210} />
             </UnstyledButton>
 
             <Group style={{ height: '100%' }} gap={0} className={classes.hiddenMobile}>
