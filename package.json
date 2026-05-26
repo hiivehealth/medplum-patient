@@ -6,7 +6,9 @@
     "build": "tsc && vite build",
     "coverage": "vitest run --coverage",
     "dev": "vite",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix src",
+    "deploy:hiive-build": "bash ./scripts/deploy-hiive-build.sh",
+    "lint": "eslint src --fix --ignore-pattern '**/*.test.ts' --ignore-pattern '**/*.test.tsx'",
+    "lint:ci": "eslint src --ignore-pattern '**/*.test.ts' --ignore-pattern '**/*.test.tsx'",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest watch"
