@@ -15,6 +15,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
+    proxy: {
+      '/api/cui-banner': 'http://127.0.0.1:8105',
+    },
+  },
+  preview: {
+    proxy: {
+      '/api/cui-banner': 'http://127.0.0.1:8105',
+    },
   },
   test: {
     environment: 'jsdom',

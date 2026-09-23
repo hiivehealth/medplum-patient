@@ -1,0 +1,15 @@
+:global(.mantine-AppShell-root):has(.banner) {
+  --cui-patient-banner-height: 32px;
+}
+
+:global(.mantine-AppShell-root):has(.banner) :global(.mantine-AppShell-main) {
+  padding-top: calc(
+    var(--app-shell-header-offset, 0rem) + var(--app-shell-padding, 0px) + var(--cui-patient-banner-height)
+  );
+}
+
+.banner {
+  position: fixed;
+  inset: var(--app-shell-header-offset, 80px) 0 auto;
+  z-index: 102;
+}

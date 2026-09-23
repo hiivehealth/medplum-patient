@@ -6,15 +6,27 @@ import { Suspense } from 'react';
 import type { JSX } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 import { Router } from './Router';
+import { CuiBanner } from './components/CuiBanner/CuiBanner';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { Loading } from './components/Loading';
+import cuiShellClasses from './features/cui/CuiAppShell.module.css';
+import { CuiPolicyProvider, useCuiPolicy } from './features/cui/CuiPolicyProvider';
 import { RegisterPage } from './pages/RegisterPage';
 import { SignInPage } from './pages/SignInPage';
 import { LandingPage } from './pages/landing';
 
 export function App(): JSX.Element | null {
+  return (
+    <CuiPolicyProvider>
+      <AppContent />
+    </CuiPolicyProvider>
+  );
+}
+
+function AppContent(): JSX.Element | null {
   const medplum = useMedplum();
+  const { state: cuiPolicy } = useCuiPolicy();
 
   if (medplum.isLoading()) {
     return null;
@@ -31,9 +43,21 @@ export function App(): JSX.Element | null {
     );
   }
 
+  const cuiEnabled =
+    cuiPolicy.status === 'ready'
+      ? cuiPolicy.policy.enabled
+      : cuiPolicy.status === 'error'
+        ? cuiPolicy.lastKnown?.enabled === true
+        : false;
+
   return (
     <AppShell header={{ height: 80 }}>
       <Header />
+      {cuiEnabled && (
+        <div className={cuiShellClasses.banner}>
+          <CuiBanner />
+        </div>
+      )}
       <AppShell.Main>
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
