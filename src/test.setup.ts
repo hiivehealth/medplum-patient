@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
 // SPDX-License-Identifier: Apache-2.0
 import '@testing-library/jest-dom';
+import { MemoryStorage } from '@medplum/core';
 import { TextDecoder, TextEncoder } from 'node:util';
 import { vi } from 'vitest';
 
@@ -28,3 +29,6 @@ class ResizeObserver {
 }
 
 window.ResizeObserver = ResizeObserver;
+
+Object.defineProperty(globalThis.window, 'sessionStorage', { value: new MemoryStorage() });
+Object.defineProperty(globalThis.window, 'localStorage', { value: new MemoryStorage() });
