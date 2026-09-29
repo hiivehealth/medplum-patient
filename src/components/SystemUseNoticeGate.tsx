@@ -91,10 +91,11 @@ export function SystemUseNoticeGate(props: SystemUseNoticeGateProps): JSX.Elemen
 
   useEffect(() => {
     const originalStartLogin = medplum.startLogin.bind(medplum);
-    medplum.startLogin = ((loginRequest, options) => {
+    const startLogin: MedplumClient['startLogin'] = (loginRequest, options) => {
       const next = noticeVersion ? { ...loginRequest, systemUseNoticeVersion: noticeVersion } : loginRequest;
       return originalStartLogin(next, options);
-    }) as MedplumClient['startLogin'];
+    };
+    medplum.startLogin = startLogin;
     return () => {
       medplum.startLogin = originalStartLogin;
     };
